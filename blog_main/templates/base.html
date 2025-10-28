@@ -1,0 +1,71 @@
+
+<!-- HEADER PART -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Blogs</title>
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <style>
+          footer {
+            background-color: #777d83;
+            color: #ffffff;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+  </head>
+<body>
+    <div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-8 pt-1">
+            <a class="blog-header-logo text-dark" href="/">Django Blog</a>
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <a class="btn btn-sm btn-warning" href="#">Login</a> &nbsp;
+            <a class="btn btn-sm btn-outline-secondary" href="#">Register</a>
+          </div>
+        </div>
+      </header>
+      <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+          {% for cat in category %}
+          <a class="p-2 text-muted" href="{% url 'post_by_category' cat.id %}">{{ cat.category_name }}</a>
+          {% endfor %}
+      </div>
+
+<!-- MAIN PART -->
+{% block content %}
+
+{% endblock %}
+
+<!-- FOOTER PART -->
+<footer class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">
+                        &copy; 2025 RUPESH CHHETRI. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+ </div>
+</body>
+</html>
