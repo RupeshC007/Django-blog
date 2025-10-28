@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Blog, Category
+from django.http import HttpResponse
+from django.db.models import Q
 
 
 # Create your views here.
@@ -11,3 +13,24 @@ def post_by_category(request, category_id):
         'category_title':category_title,
     }
     return render(request, 'posts_by_category.html', context)
+
+
+def blog_detail(request, slug):
+    single_post = Blog.objects.get(slug=slug, status="Published")
+    context = {
+        'single_post': single_post,
+    }
+    return render(request, 'blog_detail.html', context)
+
+def socialmedia_detail(request, socialmedia_id):
+    return HttpResponse(f"Social Media Detail Page for ID: {socialmedia_id}")
+
+def blog_search(request):
+    keyword = request.GET.get('keyword')
+    blogs= Blog.objects.filter(Q(title__icontains=keyword) | Q(short_description__icontains=keyword) | Q(blog_body__icontains=keyword), status="Published") 
+    context={
+        'blogs': blogs,
+        'keyword': keyword,
+    }
+    
+    return render(request, 'blog_search.html', context)

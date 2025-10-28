@@ -4,20 +4,20 @@
 
 
 {% for post in featured_posts %}
-{% if forloop.first %}
-<div
-  class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
-  style="background-image: url({{post.featured_image.url}});background-blend-mode:overlay; background-size:cover;"
->
-  <div class="col-md-8 px-0">
-    <h1 class="display-4 font-italic">{{ post.title }}</h1>
-    <p class="lead my-3">{{post.short_description}}</p>
-    <p class="lead mb-0">
-      <a href="#" class="text-white font-weight-bold">Continue reading...</a>
-    </p>
+  {% if forloop.first %}
+  <div
+    class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
+    style="background-image: url({{post.featured_image.url}});background-blend-mode:overlay; background-size:cover;"
+  >
+    <div class="col-md-8 px-0">
+      <h1 class="display-4 font-italic">{{ post.title }}</h1>
+      <p class="lead my-3">{{post.short_description}}</p>
+      <p class="lead mb-0">
+        <a href="{% url 'blog_detail' post.slug %}" class="text-white font-weight-bold">Continue reading...</a>
+      </p>
+    </div>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 {% endfor %}
 
 <!-- FEAUTURED POSTS -->
@@ -26,20 +26,22 @@
   FEATURED POSTS
 </h3>
 <div class="d-flex">
-  {% for post in featured_posts %} {% if not forloop.first %}
-  <div class="card m-2" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="{{ post.featured_image.url }}"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
-      <p class="card-text">{{ post.short_description }}</p>
-      <a href="#" class="btn btn-primary">Read More</a>
+  {% for post in featured_posts %}
+    {% if not forloop.first %}
+    <div class="card m-2" style="width: 18rem">
+      <img
+        class="card-img-top"
+        src="{{ post.featured_image.url }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.short_description }}</p>
+        <a href="{% url 'blog_detail' post.slug %}" class="btn btn-primary">Read More</a>
+      </div>
     </div>
-  </div>
-  {% endif %} {% endfor %}
+    {% endif %}
+  {% endfor %}
 </div>
 
 <h3 class="text-uppercase text-warning" style="letter-spacing: 2px">
@@ -55,7 +57,7 @@
         >{{post.created_at | timesince}} | {{post.author}}</small
       >
     </p>
-    <a href="#" class="btn btn-primary">Read More</a>
+    <a href="{% url 'blog_detail' post.slug %}" class="btn btn-primary">Read More</a>
   </div>
 </div>
 {% endif %}

@@ -32,3 +32,15 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+    #social media share links
+
+class SocialMedia(models.Model):
+    platform_name = models.CharField(max_length=100)
+    profile_url = models.URLField()
+
+
+
+    def __str__(self):
+        return self.platform_name
