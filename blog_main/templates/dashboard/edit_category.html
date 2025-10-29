@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row">
+  {% include 'dashboard/sidebar.html' %}
+   <div class="col-md-9">
+     <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">EDIT CATEGORY</h3>
+    <div>
+        <form action="{% url 'edit_category' category_title.id %} " method="post" style="width: 500px;">
+        {% csrf_token %}
+        {{form | crispy }}
+        <br>
+        <button type="submit" class="btn btn-dark text-light mb-2">Update Category</button>
+    </form>
+    </div>
+
+   </div>
+</div>
+{% endblock %}
