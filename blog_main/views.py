@@ -39,8 +39,13 @@ def login(request):
 
             user=auth.authenticate(username=username, password=password)
             if user is not None:
-                auth.login(request, user)
-                return redirect('dashboard')
+                if user.is_staff:
+                    auth.login(request, user)
+                    return redirect('dashboard')
+                else:
+                    auth.login(request, user)
+                    return redirect('home')
+                
             else:
                 return redirect('home')
     form=AuthenticationForm()

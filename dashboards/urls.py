@@ -14,4 +14,7 @@ urlpatterns = [
     path("blogs/add/",views.add_blog, name="add_blog"),
     path("blogs/edit/<int:id>",views.edit_blog, name="edit_blog"),
     path("blogs/delete/<int:id>",views.delete_blog, name="delete_blog"),
+
+    #manger dashboard
+    path("users/", views.users, name="users"),
 ]
